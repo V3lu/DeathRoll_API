@@ -20,4 +20,8 @@ public class User {
 
     private String hashedPassword;
 
+    private double gold;
+
+    private double dollars;
+
 }
