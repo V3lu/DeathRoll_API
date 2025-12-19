@@ -16,14 +16,14 @@ public class PaymentsController {
 
     @PostMapping("/Deposit")
     public ResponseEntity<String> depositCashAndConvertToGold(@RequestBody float cash){
-        // TODO DepositProcess
+        // TODO DepositProcess using stripe
 
         return ResponseEntity.ok("Gold has been added to your account");
     }
 
     @PostMapping("/Withdraw")
     public ResponseEntity<String> withdrawCash(@RequestBody float userGold){
-        // TODO convert userGold to cash and withdraw
+        // TODO convert userGold to cash and withdraw using stripe
 
         return ResponseEntity.ok("Gold has been added to your account");
     }
