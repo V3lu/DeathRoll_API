@@ -1,6 +1,6 @@
-package Repositories;
+package com.deathroll.DeathRoll.Repositories;
 
-import Models.User;
+import com.deathroll.DeathRoll.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

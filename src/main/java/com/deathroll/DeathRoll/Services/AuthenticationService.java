@@ -1,7 +1,7 @@
-package Services;
+package com.deathroll.DeathRoll.Services;
 
-import Models.User;
-import Repositories.UserRepository;
+import com.deathroll.DeathRoll.Models.User;
+import com.deathroll.DeathRoll.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

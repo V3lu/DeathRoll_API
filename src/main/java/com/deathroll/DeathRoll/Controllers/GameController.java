@@ -1,6 +1,6 @@
-package Controllers;
+package com.deathroll.DeathRoll.Controllers;
 
-import Models.Roll;
+import com.deathroll.DeathRoll.Models.Roll;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

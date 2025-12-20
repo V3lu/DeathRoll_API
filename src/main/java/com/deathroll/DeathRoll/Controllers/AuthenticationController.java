@@ -1,8 +1,7 @@
-package Controllers;
+package com.deathroll.DeathRoll.Controllers;
 
-import Models.User;
-import Services.AuthenticationService;
-import lombok.Data;
+import com.deathroll.DeathRoll.Models.User;
+import com.deathroll.DeathRoll.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

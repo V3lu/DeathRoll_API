@@ -1,18 +1,18 @@
-package Models;
+package com.deathroll.DeathRoll.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private String username;
 
@@ -23,5 +23,8 @@ public class User {
     private double gold;
 
     private double dollars;
+
+    @OneToMany(mappedBy = "user")
+    private List<Roll> rolls;
 
 }

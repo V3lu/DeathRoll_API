@@ -1,4 +1,4 @@
-package Models;
+package com.deathroll.DeathRoll.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -6,11 +6,12 @@ import java.util.Random;
 
 @Data
 @Entity
+@Table(name = "rolls")
 public class Roll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name="user_id")

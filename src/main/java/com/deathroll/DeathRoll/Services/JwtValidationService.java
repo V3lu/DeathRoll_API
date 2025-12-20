@@ -1,7 +1,7 @@
-package Services;
+package com.deathroll.DeathRoll.Services;
 
-import Models.User;
-import Repositories.UserRepository;
+import com.deathroll.DeathRoll.Models.User;
+import com.deathroll.DeathRoll.Repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

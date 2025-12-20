@@ -1,4 +1,4 @@
-package Controllers;
+package com.deathroll.DeathRoll.Controllers;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
