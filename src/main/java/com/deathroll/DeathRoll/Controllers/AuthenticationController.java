@@ -1,9 +1,12 @@
 package com.deathroll.DeathRoll.Controllers;
 
+import com.deathroll.DeathRoll.DTOs.MessageResponse;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import com.deathroll.DeathRoll.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.aspectj.bridge.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,36 +21,32 @@ public class AuthenticationController {
     private final UserRepository userRepository;
 
     @PostMapping("/Login")
-    public ResponseEntity<String> Login(@RequestBody User userToLogin) {
+    public ResponseEntity<MessageResponse> Login(@RequestBody User userToLogin) {
         String token = authenticationService.login(userToLogin);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new MessageResponse(token));
     }
 
     @PostMapping("/Register")
-    public ResponseEntity<String> Register(@RequestBody User userToRegister) {
+    public ResponseEntity<MessageResponse> Register(@RequestBody User userToRegister) {
         String token = authenticationService.register(userToRegister);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new MessageResponse(token));
     }
 
     @PostMapping("/CheckUsernameViability")
-    public ResponseEntity<String> CheckUsernameViability(@RequestBody User userWithUsernameToCheck) {
+    public ResponseEntity<MessageResponse> CheckUsernameViability(@RequestBody User userWithUsernameToCheck) {
         boolean userExists = userRepository.existsByUsername(userWithUsernameToCheck.getUsername());
         if(userExists){
-            return new ResponseEntity<String>("User with such a name already exists in the system", HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse("User with this username already exists"));
         }
-        else{
-            return ResponseEntity.ok("Username available");
-        }
+        return ResponseEntity.ok(new MessageResponse("Username is available"));
     }
 
     @PostMapping("CheckEmailViability")
-    public ResponseEntity<String> CheckEmailViability(@RequestBody User userWithEmailToCheck) {
+    public ResponseEntity<MessageResponse> CheckEmailViability(@RequestBody User userWithEmailToCheck) {
         boolean userExists = userRepository.existsByEmail(userWithEmailToCheck.getEmail());
         if(userExists){
-            return new ResponseEntity<String>("User with such an email already exists in the system", HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse("User with such an email already exists"));
         }
-        else{
-            return ResponseEntity.ok("Email available");
-        }
+        return ResponseEntity.ok(new MessageResponse("Email is available"));
     }
 }
