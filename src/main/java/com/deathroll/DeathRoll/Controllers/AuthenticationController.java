@@ -1,6 +1,7 @@
 package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.MessageResponse;
+import com.deathroll.DeathRoll.DTOs.TokenUserResponse;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import com.deathroll.DeathRoll.Services.AuthenticationService;
@@ -10,6 +11,8 @@ import org.aspectj.bridge.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Auth")
@@ -21,15 +24,17 @@ public class AuthenticationController {
     private final UserRepository userRepository;
 
     @PostMapping("/Login")
-    public ResponseEntity<MessageResponse> Login(@RequestBody User userToLogin) {
+    public ResponseEntity<TokenUserResponse> Login(@RequestBody User userToLogin) {
         String token = authenticationService.login(userToLogin);
-        return ResponseEntity.ok(new MessageResponse(token));
+        Optional<User> dbuser = userRepository.findByUsername(userToLogin.getUsername());
+        return ResponseEntity.ok(new TokenUserResponse(token, dbuser));
     }
 
     @PostMapping("/Register")
-    public ResponseEntity<MessageResponse> Register(@RequestBody User userToRegister) {
+    public ResponseEntity<TokenUserResponse> Register(@RequestBody User userToRegister) {
         String token = authenticationService.register(userToRegister);
-        return ResponseEntity.ok(new MessageResponse(token));
+        Optional<User> dbuser = userRepository.findByUsername(userToRegister.getUsername());
+        return ResponseEntity.ok(new TokenUserResponse(token, dbuser));
     }
 
     @PostMapping("/CheckUsernameViability")
