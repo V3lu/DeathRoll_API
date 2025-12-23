@@ -6,8 +6,6 @@ import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import com.deathroll.DeathRoll.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
-import org.aspectj.bridge.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

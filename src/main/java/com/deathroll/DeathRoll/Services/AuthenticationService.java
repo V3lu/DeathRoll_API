@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -16,6 +19,7 @@ public class AuthenticationService {
 
     public String register(User user) {
         user.setHashedPassword(passwordEncoder.encode(user.getHashedPassword()));
+        user.setCreatedAt(LocalDate.now());
         userRepository.save(user);
         return jwtService.generateToken(user);
     }

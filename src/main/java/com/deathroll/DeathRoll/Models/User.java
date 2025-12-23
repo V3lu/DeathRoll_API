@@ -3,6 +3,7 @@ package com.deathroll.DeathRoll.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class User {
 
     private double dollars;
 
-    private Date createdAt;
+    private LocalDate createdAt;
 
     @OneToMany(mappedBy = "user")
     private List<Roll> rolls;
