@@ -2,11 +2,14 @@ package com.deathroll.DeathRoll.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Random;
 
 @Data
 @Entity
 @Table(name = "rolls")
+@NoArgsConstructor
 public class Roll {
 
     @Id

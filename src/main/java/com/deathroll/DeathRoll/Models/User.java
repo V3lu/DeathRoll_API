@@ -1,15 +1,18 @@
 package com.deathroll.DeathRoll.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -29,6 +32,7 @@ public class User {
     private LocalDate createdAt;
 
     @OneToMany(mappedBy = "user")
-    private List<Roll> rolls;
+    @JsonIgnore
+    private List<Roll> rolls = new ArrayList<>();
 
 }

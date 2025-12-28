@@ -1,6 +1,5 @@
 package com.deathroll.DeathRoll.Controllers;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +24,6 @@ public class PaymentsController {
     public ResponseEntity<String> withdrawCash(@RequestBody float userGold){
         // TODO convert userGold to cash and withdraw using stripe
 
-        return ResponseEntity.ok("Gold has been added to your account");
+        return ResponseEntity.ok("Your money has been withdrawn");
     }
 }
