@@ -3,6 +3,7 @@ package com.deathroll.DeathRoll.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Random;
 
@@ -18,6 +19,7 @@ public class Roll {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @ToString.Exclude
     private User user;
 
     private int rollBase;

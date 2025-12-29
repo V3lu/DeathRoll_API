@@ -2,28 +2,29 @@ package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.RollResponse;
 import com.deathroll.DeathRoll.Models.Roll;
+import com.deathroll.DeathRoll.Models.User;
+import com.deathroll.DeathRoll.Repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @RestController
 @RequestMapping("/Game")
 public class GameController {
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/PlaceRoll")
     public ResponseEntity<RollResponse> Roll(
             @RequestBody Roll prevRoll,
             Principal principal //Principal is automatically injected via Spring Principal resolver
     ){
-        try{
-            Roll next = new Roll(prevRoll.getRollBase());
-            return ResponseEntity.ok(new RollResponse(List.of(next)));
-            // TODO save rolls in db
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow(
+                () -> new RuntimeException("User not found")
+        );
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class User {
     private LocalDate createdAt;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     @JsonIgnore
     private List<Roll> rolls = new ArrayList<>();
 
