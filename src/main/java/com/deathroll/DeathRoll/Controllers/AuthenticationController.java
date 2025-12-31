@@ -2,10 +2,14 @@ package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.MessageResponse;
 import com.deathroll.DeathRoll.DTOs.TokenUserResponse;
+import com.deathroll.DeathRoll.DTOs.UserDTO;
+import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import com.deathroll.DeathRoll.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.antlr.v4.runtime.Token;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +28,14 @@ public class AuthenticationController {
     public ResponseEntity<TokenUserResponse> Login(@RequestBody User userToLogin) {
         String token = authenticationService.login(userToLogin);
         Optional<User> dbuser = userRepository.findByUsername(userToLogin.getUsername());
-        return ResponseEntity.ok(new TokenUserResponse(token, dbuser));
+        return dbuser.map((user) -> ResponseEntity.ok(new TokenUserResponse(token, EntitiesMapper.toUserDTO(user)))).orElse(null);
     }
 
     @PostMapping("/Register")
     public ResponseEntity<TokenUserResponse> Register(@RequestBody User userToRegister) {
         String token = authenticationService.register(userToRegister);
         Optional<User> dbuser = userRepository.findByUsername(userToRegister.getUsername());
-        return ResponseEntity.ok(new TokenUserResponse(token, dbuser));
+        return dbuser.map((user) -> ResponseEntity.ok(new TokenUserResponse(token, EntitiesMapper.toUserDTO(user)))).orElse(null);
     }
 
     @PostMapping("/CheckUsernameViability")
