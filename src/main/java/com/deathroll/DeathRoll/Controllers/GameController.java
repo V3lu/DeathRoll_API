@@ -1,6 +1,7 @@
 package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.RollDTO;
+import com.deathroll.DeathRoll.DTOs.UserDTO;
 import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.Roll;
 import com.deathroll.DeathRoll.Models.User;
@@ -10,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
+import java.util.List;
 
 
 @RestController
@@ -25,7 +25,7 @@ public class GameController {
     private RollRepository rollRepository;
 
     @PostMapping("/PlaceRoll")
-    public ResponseEntity<RollDTO> Roll(
+    public ResponseEntity<RollDTO> PlaceRoll(
             @RequestBody Roll prevRoll,
             Authentication authentication //Injected automatically via spring resolver
     ){
@@ -35,5 +35,12 @@ public class GameController {
         roll.setUser(user);
         rollRepository.save(roll);
         return ResponseEntity.ok(EntitiesMapper.toRollDTO(roll));
+    }
+
+    @PostMapping("/SimilarBetOpponents")
+    public ResponseEntity<List<UserDTO>> SimilarBetOpponents(
+            @RequestBody Roll prevRoll
+    ){
+
     }
 }

@@ -26,6 +26,8 @@ public class Roll {
 
     private int rolledNumber;
 
+    private boolean isActive;
+
     public Roll(int base){
         this.rollBase = base;
         Random random = new Random();
