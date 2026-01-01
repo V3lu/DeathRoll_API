@@ -24,6 +24,7 @@ public class GameController {
     @Autowired
     private RollRepository rollRepository;
 
+    // Create new roll, save it in the db, map to RollDTO and send back to front-end
     @PostMapping("/PlaceRoll")
     public ResponseEntity<RollDTO> PlaceRoll(
             @RequestBody Roll prevRoll,
@@ -37,10 +38,11 @@ public class GameController {
         return ResponseEntity.ok(EntitiesMapper.toRollDTO(roll));
     }
 
+    // Search 5 opponents with active bets similar to chosen bet amount by the user
     @PostMapping("/SimilarBetOpponents")
     public ResponseEntity<List<UserDTO>> SimilarBetOpponents(
             @RequestBody Roll prevRoll
     ){
-
+        //TODO choose a safe framework for generating SQL Queries or find other way to not write SQL by hand
     }
 }

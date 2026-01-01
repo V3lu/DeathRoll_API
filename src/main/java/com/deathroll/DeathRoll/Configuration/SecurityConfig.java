@@ -43,6 +43,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Global CORS configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

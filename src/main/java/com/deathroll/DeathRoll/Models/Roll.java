@@ -17,6 +17,7 @@ public class Roll {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    // Excluded to avoid infinite JSON loop
     @ManyToOne
     @JoinColumn(name="user_id")
     @ToString.Exclude

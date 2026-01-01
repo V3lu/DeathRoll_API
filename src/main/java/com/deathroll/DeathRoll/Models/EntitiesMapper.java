@@ -3,6 +3,7 @@ package com.deathroll.DeathRoll.Models;
 import com.deathroll.DeathRoll.DTOs.RollDTO;
 import com.deathroll.DeathRoll.DTOs.UserDTO;
 
+// Mapper of Entities into their respective DTOs for sending to client
 public class EntitiesMapper {
 
     public static RollDTO toRollDTO(Roll roll){

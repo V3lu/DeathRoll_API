@@ -23,6 +23,7 @@ public class JwtValidationService extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserRepository userRepository;
 
+    // Make Auth/ endpoints not require JWT authentication
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request){
         return request.getServletPath().startsWith("/Auth/");
@@ -43,10 +44,12 @@ public class JwtValidationService extends OncePerRequestFilter {
             return;
         }
 
+        // Extract token
         String jwt = authHeader.substring(7);
         String username;
 
         try {
+            // Extract username from token
             username = jwtService.extractUsername(jwt);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -68,6 +71,7 @@ public class JwtValidationService extends OncePerRequestFilter {
                 new WebAuthenticationDetailsSource().buildDetails(request)
         );
 
+        // Set up global Authentication object with principal containing authorized user
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(request, response);

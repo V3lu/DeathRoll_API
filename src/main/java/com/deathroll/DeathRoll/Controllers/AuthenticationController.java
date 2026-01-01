@@ -24,6 +24,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserRepository userRepository;
 
+    //Login business logic
     @PostMapping("/Login")
     public ResponseEntity<TokenUserResponse> Login(@RequestBody User userToLogin) {
         String token = authenticationService.login(userToLogin);
@@ -31,6 +32,7 @@ public class AuthenticationController {
         return dbuser.map((user) -> ResponseEntity.ok(new TokenUserResponse(token, EntitiesMapper.toUserDTO(user)))).orElse(null);
     }
 
+    //Register business logic
     @PostMapping("/Register")
     public ResponseEntity<TokenUserResponse> Register(@RequestBody User userToRegister) {
         String token = authenticationService.register(userToRegister);
