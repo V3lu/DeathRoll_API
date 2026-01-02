@@ -39,7 +39,6 @@ public class SecurityConfig {
                         jwtValidationService,
                         UsernamePasswordAuthenticationFilter.class
                 );
-
         return http.build();
     }
 

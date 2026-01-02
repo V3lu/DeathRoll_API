@@ -6,11 +6,15 @@ import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.Roll;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.RollRepository;
+import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,9 +44,22 @@ public class GameController {
 
     // Search 5 opponents with active bets similar to chosen bet amount by the user
     @PostMapping("/SimilarBetOpponents")
-    public ResponseEntity<List<UserDTO>> SimilarBetOpponents(
+    public ResponseEntity<List<RollDTO>> SimilarBetOpponents(
             @RequestBody Roll prevRoll
     ){
-        //TODO choose a safe framework for generating SQL Queries or find other way to not write SQL by hand
+        List<Roll> rolls = findSimilarBets(prevRoll.getRollBase());
+        return ResponseEntity.ok(EntitiesMapper.toRollDTOList(rolls));
+    }
+
+    public List<Roll> findSimilarBets(
+            int rollBase
+    ){
+        if (rollBase != 0){
+            Specification<Roll> spec = Specification.where(RollSpecification.hasRollBaseBetweenBorder500(rollBase));
+            return rollRepository.findAll(spec);
+        }
+        else{
+            return new ArrayList<>();
+        }
     }
 }

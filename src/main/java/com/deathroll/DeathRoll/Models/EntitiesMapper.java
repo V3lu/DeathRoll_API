@@ -3,6 +3,9 @@ package com.deathroll.DeathRoll.Models;
 import com.deathroll.DeathRoll.DTOs.RollDTO;
 import com.deathroll.DeathRoll.DTOs.UserDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Mapper of Entities into their respective DTOs for sending to client
 public class EntitiesMapper {
 
@@ -23,5 +26,25 @@ public class EntitiesMapper {
                 user.getCreatedAt(),
                 user.getRolls().stream().map(EntitiesMapper::toRollDTO).toList()
         );
+    }
+
+    public static List<RollDTO> toRollDTOList(List<Roll> rolls){
+        ArrayList<RollDTO> dtos = new ArrayList<>();
+
+        for (Roll roll : rolls){
+            dtos.add(toRollDTO(roll));
+        }
+
+        return dtos;
+    }
+
+    public static List<UserDTO> toUserDTOList(List<User> users){
+        ArrayList<UserDTO> dtos = new ArrayList<>();
+
+        for (User user : users){
+            dtos.add(toUserDTO(user));
+        }
+
+        return dtos;
     }
 }

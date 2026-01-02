@@ -26,7 +26,7 @@ public class Roll {
     private int rollBase;
 
     private int rolledNumber;
-
+    // SELECT user_id FROM roll WHERE rollBase < param + 500 AND rollbase > param - 500
     private boolean isActive;
 
     public Roll(int base){
