@@ -27,6 +27,7 @@ public class Roll {
 
     private int rolledNumber;
     // SELECT user_id FROM roll WHERE rollBase < param + 500 AND rollbase > param - 500
+    @Column(columnDefinition="BOOLEAN DEFAULT false")
     private boolean isActive;
 
     public Roll(int base){

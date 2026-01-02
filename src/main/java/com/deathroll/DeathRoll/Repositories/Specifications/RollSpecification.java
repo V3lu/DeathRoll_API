@@ -6,7 +6,13 @@ import org.springframework.data.jpa.domain.Specification;
 public class RollSpecification {
 
     public static Specification<Roll> hasRollBaseBetweenBorder500(Integer rollBase){
+        return (root, query, cb) -> {
+            if (rollBase == null) return null;
 
-        return (root, query, cb) -> rollBase == null ? null : cb.between(root.get("rollBase"), rollBase - 500, rollBase + 500);
+            int min = rollBase - 500;
+            int max = rollBase + 500;
+
+            return cb.between(root.get("rollBase"), min, max);
+        };
     }
 }

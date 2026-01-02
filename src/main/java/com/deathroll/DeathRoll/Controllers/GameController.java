@@ -42,7 +42,6 @@ public class GameController {
         return ResponseEntity.ok(EntitiesMapper.toRollDTO(roll));
     }
 
-    // Search 5 opponents with active bets similar to chosen bet amount by the user
     @PostMapping("/SimilarBetOpponents")
     public ResponseEntity<List<RollDTO>> SimilarBetOpponents(
             @RequestBody Roll prevRoll
