@@ -1,7 +1,12 @@
 package com.deathroll.DeathRoll.Repositories.Specifications;
 
 import com.deathroll.DeathRoll.Models.Roll;
+import com.deathroll.DeathRoll.Models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.Authentication;
+
+import java.util.Objects;
 
 public class RollSpecification {
 
@@ -14,5 +19,13 @@ public class RollSpecification {
 
             return cb.between(root.get("rollBase"), min, max);
         };
+    }
+
+    public static Specification<Roll> hasUserIdNotItsOwn(Long loggedUserId){
+        return ((root, query, cb) -> {
+            if (loggedUserId == null) return null;
+
+            return cb.notEqual(root.get("user").get("id"), loggedUserId);
+        });
     }
 }

@@ -44,17 +44,22 @@ public class GameController {
 
     @PostMapping("/SimilarBetOpponents")
     public ResponseEntity<List<RollDTO>> SimilarBetOpponents(
-            @RequestBody Roll prevRoll
+            @RequestBody Roll prevRoll,
+            Authentication authentication
     ){
-        List<Roll> rolls = findSimilarBets(prevRoll.getRollBase());
+        User loggedUser = (User) authentication.getPrincipal();
+        List<Roll> rolls = findSimilarBets(prevRoll.getRollBase(), loggedUser);
         return ResponseEntity.ok(EntitiesMapper.toRollDTOList(rolls));
     }
 
     public List<Roll> findSimilarBets(
-            int rollBase
+            int rollBase,
+            User loggedUser
     ){
         if (rollBase != 0){
-            Specification<Roll> spec = Specification.where(RollSpecification.hasRollBaseBetweenBorder500(rollBase));
+            Specification<Roll> spec = Specification
+                    .where(RollSpecification.hasRollBaseBetweenBorder500(rollBase))
+                    .and(RollSpecification.hasUserIdNotItsOwn(loggedUser.getId()));
             return rollRepository.findAll(spec);
         }
         else{
