@@ -32,6 +32,9 @@ public class User {
 
     private LocalDate createdAt;
 
+    @Column(columnDefinition="BOOLEAN DEFAULT false")
+    private boolean isInGame;
+
     //Excluded from JSON and toString to avoid infinite JSON nesting loop
     @OneToMany(mappedBy = "user")
     @ToString.Exclude

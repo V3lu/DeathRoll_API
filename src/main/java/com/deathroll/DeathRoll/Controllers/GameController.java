@@ -8,6 +8,7 @@ import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.RollRepository;
 import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class GameController {
     private RollRepository rollRepository;
 
     // Create new roll, save it in the db, map to RollDTO and send back to front-end
+    @Transactional
     @PostMapping("/PlaceRoll")
     public ResponseEntity<RollDTO> PlaceRoll(
             @RequestBody Roll prevRoll,
@@ -38,7 +40,6 @@ public class GameController {
         Roll roll = new Roll(prevRoll.getRollBase());
 
         roll.setUser(user);
-        rollRepository.save(roll);
         return ResponseEntity.ok(EntitiesMapper.toRollDTO(roll));
     }
 
