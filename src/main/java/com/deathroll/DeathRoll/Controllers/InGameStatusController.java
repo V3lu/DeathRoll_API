@@ -28,7 +28,7 @@ public class InGameStatusController {
         return ResponseEntity.ok(new MessageResponse("In-Game status set to true"));
     }
 
-    @Transactional
+    @Transactional  //Transaactional automatically calls repository.save()
     @PostMapping("/DisableInGameStatus")
     public ResponseEntity<MessageResponse> DisableInGameStatus(
             @RequestBody User user
