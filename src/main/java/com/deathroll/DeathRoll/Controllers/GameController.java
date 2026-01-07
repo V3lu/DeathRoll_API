@@ -4,6 +4,7 @@ import com.deathroll.DeathRoll.DTOs.RollDTO;
 import com.deathroll.DeathRoll.DTOs.UserDTO;
 import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.Roll;
+import com.deathroll.DeathRoll.Models.RollChain;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.RollRepository;
 import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
@@ -39,7 +40,30 @@ public class GameController {
         User user = (User) authentication.getPrincipal();
         Roll roll = new Roll(prevRoll.getRollBase());
 
-        //TODO implement adding roll to RollChain and roll of an opponent to the same chain
+        User opponent = userRepository.findByUsername(prevRoll.getUser().getUsername()).orElseThrow(() -> new RuntimeException("Opponent not found"));
+
+        // Roll chain for logged user
+        if (user.isInGame()){
+            CurrentUserRollChain.Add(thisRoll);
+        }
+        else{
+            RollChain newRollChain = new RollChain();
+            newRollChain.setActive(true);
+            newRollChain.getRolls().add(presentRoll);
+        }
+
+
+        // Roll chain for opponent user
+        if (opponent.isInGame()){
+            CurrentUserRollChain.Add(thisRoll);
+        }
+        else{
+            RollChain newRollChain = new RollChain();
+            newRollChain.setActive(true);
+            newRollChain.getRolls().add(presentRoll);
+        }
+
+
 
         // 1. Recieve roll
         // 2. Check if it is the first roll of a chain for a user (comes down to checking if a user is in game currently)
