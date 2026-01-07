@@ -39,6 +39,7 @@ public class GameController {
         User user = (User) authentication.getPrincipal();
         Roll roll = new Roll(prevRoll.getRollBase());
 
+        //TODO implement adding roll to RollChain and roll of an opponent to the same chain
         roll.setUser(user);
         return ResponseEntity.ok(EntitiesMapper.toRollDTO(roll));
     }

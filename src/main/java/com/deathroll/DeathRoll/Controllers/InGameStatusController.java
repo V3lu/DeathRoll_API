@@ -25,7 +25,7 @@ public class InGameStatusController {
     ){
         User dbuser = userRepository.findByUsername(user.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
         dbuser.setInGame(true);
-        return ResponseEntity.ok(new MessageResponse("In-Game status set to true"));
+        return ResponseEntity.ok(new MessageResponse("In-Game status set to true for user: " + user.getUsername()));
     }
 
     @Transactional  //Transaactional automatically calls repository.save()
