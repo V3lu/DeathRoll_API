@@ -40,6 +40,10 @@ public class GameController {
         Roll roll = new Roll(prevRoll.getRollBase());
 
         //TODO implement adding roll to RollChain and roll of an opponent to the same chain
+
+        // 1. Recieve roll
+        // 2. Check if it is the first roll of a chain for a user (comes down to checking if a user is in game currently)
+        // 3. Create new RollChain if not in a game already or add to an existing one if in a game already
         roll.setUser(user);
         return ResponseEntity.ok(EntitiesMapper.toRollDTO(roll));
     }
