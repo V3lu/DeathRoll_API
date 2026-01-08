@@ -6,6 +6,7 @@ import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.Roll;
 import com.deathroll.DeathRoll.Models.RollChain;
 import com.deathroll.DeathRoll.Models.User;
+import com.deathroll.DeathRoll.Repositories.RollChainRepository;
 import com.deathroll.DeathRoll.Repositories.RollRepository;
 import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
@@ -29,6 +30,9 @@ public class GameController {
 
     @Autowired
     private RollRepository rollRepository;
+
+    @Autowired
+    private RollChainRepository rollChainRepository;
 
     // Create new roll, save it in the db, map to RollDTO and send back to front-end
     @Transactional

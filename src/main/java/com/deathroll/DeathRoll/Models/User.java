@@ -41,4 +41,9 @@ public class User {
     @JsonIgnore
     private List<Roll> rolls = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    ToString.Exclude
+    @JsonIgnore
+    private List<RollChain> rollChains = new ArrayList<>();
+
 }
