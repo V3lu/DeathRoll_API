@@ -48,23 +48,24 @@ public class GameController {
 
         // Roll chain for logged user
         if (user.isInGame()){
-            CurrentUserRollChain.Add(thisRoll);
+            RollChain currentRollChain = rollChainRepository.findByIsActive(true).orElseThrow(() -> new RuntimeException("Chain not found"));
+            currentRollChain.getRolls().add(roll);
         }
         else{
             RollChain newRollChain = new RollChain();
             newRollChain.setActive(true);
-            newRollChain.getRolls().add(presentRoll);
+            newRollChain.getRolls().add(roll);
         }
 
 
         // Roll chain for opponent user
         if (opponent.isInGame()){
-            CurrentUserRollChain.Add(thisRoll);
+            RollChain currentRollChain = rollChainRepository.findByIsActive(true).orElseThrow(() -> new RuntimeException("Chain not found"));
         }
         else{
             RollChain newRollChain = new RollChain();
             newRollChain.setActive(true);
-            newRollChain.getRolls().add(presentRoll);
+            newRollChain.getRolls().add(roll);
         }
 
 

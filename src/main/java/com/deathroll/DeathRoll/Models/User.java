@@ -42,7 +42,7 @@ public class User {
     private List<Roll> rolls = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    ToString.Exclude
+    @ToString.Exclude
     @JsonIgnore
     private List<RollChain> rollChains = new ArrayList<>();
 
