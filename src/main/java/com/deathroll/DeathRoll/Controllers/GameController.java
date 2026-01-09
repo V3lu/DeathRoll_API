@@ -8,9 +8,15 @@ import com.deathroll.DeathRoll.Models.RollChain;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.RollChainRepository;
 import com.deathroll.DeathRoll.Repositories.RollRepository;
+import com.deathroll.DeathRoll.Repositories.Specifications.RollChainSpecification;
 import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +54,9 @@ public class GameController {
 
         // Roll chain for logged user
         if (user.isInGame()){
-            RollChain currentRollChain = rollChainRepository.findByIsActive(true).orElseThrow(() -> new RuntimeException("Chain not found"));
-            currentRollChain.getRolls().add(roll);
+            Specification<RollChain> spec = Specification.where(RollChainSpecification.hasIsActiveStatus(true).and(RollChainSpecification.hasUserIdEqualTo(user.getId())));
+            List<RollChain> currentRollChain = rollChainRepository.findAll(spec);
+            currentRollChain.getFirst().getRolls().add(roll);
         }
         else{
             RollChain newRollChain = new RollChain();
@@ -60,7 +67,9 @@ public class GameController {
 
         // Roll chain for opponent user
         if (opponent.isInGame()){
-            RollChain currentRollChain = rollChainRepository.findByIsActive(true).orElseThrow(() -> new RuntimeException("Chain not found"));
+            Specification<RollChain> spec = Specification.where(RollChainSpecification.hasIsActiveStatus(true).and(RollChainSpecification.hasUserIdEqualTo(opponent.getId())));
+            List<RollChain> currentRollChain = rollChainRepository.findAll(spec);
+            currentRollChain.getFirst().getRolls().add(roll);
         }
         else{
             RollChain newRollChain = new RollChain();
