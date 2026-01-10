@@ -1,11 +1,7 @@
 package com.deathroll.DeathRoll.Repositories.Specifications;
 
 import com.deathroll.DeathRoll.Models.Roll;
-import com.deathroll.DeathRoll.Models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.UpdateSpecification;
-import org.springframework.security.core.Authentication;
 
 import java.util.Objects;
 

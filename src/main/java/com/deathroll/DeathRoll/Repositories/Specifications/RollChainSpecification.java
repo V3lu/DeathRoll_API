@@ -1,6 +1,5 @@
 package com.deathroll.DeathRoll.Repositories.Specifications;
 
-import com.deathroll.DeathRoll.Models.Roll;
 import com.deathroll.DeathRoll.Models.RollChain;
 import org.springframework.data.jpa.domain.Specification;
 

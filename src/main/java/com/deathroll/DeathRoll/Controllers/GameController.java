@@ -1,7 +1,6 @@
 package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.RollDTO;
-import com.deathroll.DeathRoll.DTOs.UserDTO;
 import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.Roll;
 import com.deathroll.DeathRoll.Models.RollChain;
@@ -11,12 +10,7 @@ import com.deathroll.DeathRoll.Repositories.RollRepository;
 import com.deathroll.DeathRoll.Repositories.Specifications.RollChainSpecification;
 import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
-import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;

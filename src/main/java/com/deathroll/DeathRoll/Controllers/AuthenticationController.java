@@ -2,14 +2,11 @@ package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.MessageResponse;
 import com.deathroll.DeathRoll.DTOs.TokenUserResponse;
-import com.deathroll.DeathRoll.DTOs.UserDTO;
 import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.User;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import com.deathroll.DeathRoll.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.Token;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
