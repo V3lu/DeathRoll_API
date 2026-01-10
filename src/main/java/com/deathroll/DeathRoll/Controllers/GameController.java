@@ -1,6 +1,7 @@
 package com.deathroll.DeathRoll.Controllers;
 
 import com.deathroll.DeathRoll.DTOs.RollDTO;
+import com.deathroll.DeathRoll.DTOs.UserDTO;
 import com.deathroll.DeathRoll.Models.EntitiesMapper;
 import com.deathroll.DeathRoll.Models.Roll;
 import com.deathroll.DeathRoll.Models.RollChain;
@@ -11,6 +12,7 @@ import com.deathroll.DeathRoll.Repositories.Specifications.RollChainSpecificatio
 import com.deathroll.DeathRoll.Repositories.Specifications.RollSpecification;
 import com.deathroll.DeathRoll.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -103,5 +105,12 @@ public class GameController {
         else{
             return new ArrayList<>();
         }
+    }
+
+    @PostMapping("/GetOpponentData")
+    public ResponseEntity<UserDTO> GetOpponentData(@RequestBody User user){
+        User dbuser = userRepository.findByUsername(user.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
+        UserDTO userToReturn = EntitiesMapper.toUserDTO(dbuser);
+        return ResponseEntity.ok(userToReturn);
     }
 }
