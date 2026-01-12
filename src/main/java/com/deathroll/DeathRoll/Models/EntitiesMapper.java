@@ -1,5 +1,6 @@
 package com.deathroll.DeathRoll.Models;
 
+import com.deathroll.DeathRoll.DTOs.RollChainDTO;
 import com.deathroll.DeathRoll.DTOs.RollDTO;
 import com.deathroll.DeathRoll.DTOs.UserDTO;
 
@@ -28,6 +29,13 @@ public class EntitiesMapper {
         );
     }
 
+    public static RollChainDTO toRollChainDTO(RollChain rollChain){
+        return new RollChainDTO(
+                rollChain.getId(),
+                rollChain.getRolls().stream().map(EntitiesMapper::toRollDTO).toList()
+        );
+    }
+
     public static List<RollDTO> toRollDTOList(List<Roll> rolls){
         ArrayList<RollDTO> dtos = new ArrayList<>();
 
@@ -43,6 +51,16 @@ public class EntitiesMapper {
 
         for (User user : users){
             dtos.add(toUserDTO(user));
+        }
+
+        return dtos;
+    }
+
+    public static List<RollChainDTO> toRollChainDTOList(List<RollChain> rollChains){
+        ArrayList<RollChainDTO> dtos = new ArrayList<>();
+
+        for (RollChain rollChain : rollChains){
+            dtos.add(toRollChainDTO(rollChain));
         }
 
         return dtos;
