@@ -3,8 +3,6 @@ package com.deathroll.DeathRoll.Repositories.Specifications;
 import com.deathroll.DeathRoll.Models.Roll;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.Objects;
-
 public class RollSpecification {
 
     public static Specification<Roll> hasRollBaseBetweenBorder500(Integer rollBase){
