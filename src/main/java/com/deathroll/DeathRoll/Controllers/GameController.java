@@ -57,6 +57,7 @@ public class GameController {
             RollChain newRollChain = new RollChain();
             newRollChain.setActive(true);
             newRollChain.getRolls().add(roll);
+            user.getRollChains().add(newRollChain);
         }
 
 
@@ -70,6 +71,7 @@ public class GameController {
             RollChain newRollChain = new RollChain();
             newRollChain.setActive(true);
             newRollChain.getRolls().add(roll);
+            opponent.getRollChains().add(newRollChain);
         }
 
 
